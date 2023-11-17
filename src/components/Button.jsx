@@ -1,6 +1,8 @@
 // ButtonComponent.js
 import React from 'react';
-import '../css/Buttonstyle.css'
+import '../css/button_style.css';
+
+
 const Button = () => {
   const handleButtonClick = (buttonNumber) => {
     console.log(`Button ${buttonNumber} clicked`);

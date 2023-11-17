@@ -1,0 +1,11 @@
+.image-container {
+    align-items: end;
+    align-content: center;
+    display:flex;
+    flex-direction: column;
+    }
+
+.image-container img {
+        width: 50px; /* set your desired width */
+        height: 50px; /* maintain aspect ratio */
+      }

@@ -1,8 +1,17 @@
 /* app.css */
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .app-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 100% of the viewport height */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: #f0f0f0; /* Optional: Add a background color for better visibility */
+}
+
+h1 {
+  font-size: 2em; /* Optional: Adjust the font size */
+}
