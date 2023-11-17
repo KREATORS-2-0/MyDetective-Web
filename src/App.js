@@ -19,6 +19,10 @@ const App = () => {
     socket.emit("passcode", newPasscode);
   };
 
+  const handleCommand = (command) => {
+    socket.emit("command", command);
+  };
+
   useEffect(() => {
     socket.on("connection", (passcode_status) => {
       console.log("connected!");
@@ -35,7 +39,7 @@ const App = () => {
       <div className="background-image-container">
         <UnorderedList></UnorderedList>
         <Image />
-        <Button />
+        <Button handleButton={handleCommand} />
       </div>
     </>
   );

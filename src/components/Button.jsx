@@ -1,20 +1,14 @@
 // ButtonComponent.js
-import React from 'react';
-import '../css/button_style.css';
+import React from "react";
+import "../css/button_style.css";
 
-
-const Button = () => {
-  const handleButtonClick = (buttonNumber) => {
-    console.log(`Button ${buttonNumber} clicked`);
-    // Add your button click logic here
-  };
-
+const Button = ({ handleButton }) => {
   return (
     <div className="button-container">
-      <button onClick={() => handleButtonClick(1)}>Initiate</button>
-      <button onClick={() => handleButtonClick(2)}>Start</button>
-      <button onClick={() => handleButtonClick(3)}>Pause</button>
-      <button onClick={() => handleButtonClick(4)}>Terminate</button>
+      <button onClick={() => handleButton("Initiate")}>Initiate</button>
+      <button onClick={() => handleButton("Start")}>Start</button>
+      <button onClick={() => handleButton("Pause")}>Pause</button>
+      <button onClick={() => handleButton("Terminate")}>Terminate</button>
     </div>
   );
 };

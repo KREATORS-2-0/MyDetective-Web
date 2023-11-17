@@ -34,6 +34,11 @@ const Connect = ({ handlePasscodeChange, open }) => {
             variant="outlined"
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleConnect();
+              }
+            }}
           />
         )}
       </DialogContent>
