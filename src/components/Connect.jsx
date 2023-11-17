@@ -21,6 +21,10 @@ const Connect = () => {
   const handleConnect = () => {
     setConnecting(true);
     setTitle("Connecting...");
+    setTimeout(() => {
+      setConnecting(false);
+      setOpen(false);
+    }, 2000);
   };
 
   return (
