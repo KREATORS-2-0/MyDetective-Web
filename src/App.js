@@ -13,6 +13,9 @@ const App = () => {
   const [connection, setConnection] = React.useState(true);
 
   const handlePasscodeChange = (newPasscode) => {
+    if (newPasscode === "0") {
+      setConnection(false);
+    }
     socket.emit("passcode", newPasscode);
   };
 
