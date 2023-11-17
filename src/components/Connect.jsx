@@ -5,60 +5,44 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 
-const Connect = () => {
-  const [open, setOpen] = React.useState(true);
+const Connect = ({ handlePasscodeChange, open }) => {
   const [connecting, setConnecting] = React.useState(false);
-  const [title, setTitle] = React.useState(
-    "Enter a passcode to connect to the server"
-  );
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [passcode, setPasscode] = React.useState();
+  const [title, setTitle] = React.useState("Enter Server Connection Passcode");
 
   const handleConnect = () => {
+    handlePasscodeChange(passcode);
     setConnecting(true);
-    setTitle("Connecting...");
-    setTimeout(() => {
-      setConnecting(false);
-      setOpen(false);
-    }, 2000);
+    setTitle(`Connecting to server...`);
   };
 
   return (
-    <div>
-      <Dialog open={open}>
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>
-          {connecting ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <CircularProgress />
-            </div>
-          ) : (
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Passcode"
-              fullWidth
-              variant="outlined"
-            />
-          )}
-        </DialogContent>
-        {connecting ? null : (
-          <DialogActions>
-            <Button onClick={handleConnect}>Connect</Button>
-          </DialogActions>
+    <Dialog open={open}>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogContent>
+        {connecting ? (
+          <LinearProgress />
+        ) : (
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Passcode"
+            fullWidth
+            variant="outlined"
+            value={passcode}
+            onChange={(e) => setPasscode(e.target.value)}
+          />
         )}
-      </Dialog>
-    </div>
+      </DialogContent>
+      {connecting ? null : (
+        <DialogActions>
+          <Button onClick={handleConnect}>Connect</Button>
+        </DialogActions>
+      )}
+    </Dialog>
   );
 };
 
