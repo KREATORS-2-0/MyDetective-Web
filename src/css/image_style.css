@@ -4,6 +4,7 @@
     overflow: hidden;
     top: 5px; 
     right: 10px; 
+    display:flex;
 
     width: 50px; /* Set your desired width */
     height: 50px; /* Set your desired height */
