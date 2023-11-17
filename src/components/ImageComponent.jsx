@@ -4,7 +4,7 @@ import '../css/image_style.css'
 
 const Image = () => {
   return (
-    <div className = "image-container">
+    <div className = "circular-image">
       <img src ={require("../images/NatHackLogo.png")} />
     </div>
   );
