@@ -1,8 +1,9 @@
 
 .list-container {
-    position: fixed;
-    left: center;
-    height: 300vx; 
-    display: flex;
+    position: absolute;
+    left: 0px;
+    top: 50px; 
     flex-direction: column;
+    color:black;
+    
     }
