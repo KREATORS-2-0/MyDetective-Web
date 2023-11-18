@@ -283,16 +283,16 @@ const App = () => {
             </div>
           </div>
           <div className="graphs">
-            <div className="emotion-graph">
+            { <div className="emotion-graph">
               <EmotionChart data={emotionData} />
-            </div>
-            <div className="eeg-graph">
+            </div> }
+            { <div className="eeg-graph">
               {eegData ? (
                 <EEGChart data={eegData} />
               ) : (
                 <div>Loading EEG Data...</div>
               )}
-            </div>
+            </div> }
           </div>
         </div>
         <div className="rightPanel">

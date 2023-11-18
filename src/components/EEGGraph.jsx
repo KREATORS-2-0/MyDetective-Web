@@ -1,7 +1,10 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
 const EEGChart = ({ data }) => {
+
+  
   // Extracting timestamps and channel data
   const timestamps = data.map((item) =>
     new Date(item["Timestamp"] * 1000).toLocaleTimeString()
