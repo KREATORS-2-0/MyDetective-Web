@@ -12,8 +12,11 @@ import ConnectButton from "./components/ConnectButton.jsx";
 
 const App = () => {
   // set up state for the passcode
-  const [connection, setConnection] = React.useState(true);
+
+  // todo for yongbin if connnecting is false, then set the connect button to Green
+  const [connecting, setConnecting] = React.useState(true);
   const [formData, setFormData] = React.useState({});
+  const [showConnect, setShowConnect] = useState(false);
 
   const formUpdate = async (data, key) => {
     if (key === "completed") {
@@ -54,11 +57,11 @@ const App = () => {
   };
 
   const handlePasscodeChange = (newPasscode) => {
-    if (newPasscode === "0") {
+    if (newPasscode === "") {
       setShowConnect(false);
-      setConnection(false);
+    } else {
+      socket.emit("passcode", newPasscode);
     }
-    socket.emit("passcode", newPasscode);
   };
 
   const handleCommand = (command) => {
@@ -68,17 +71,16 @@ const App = () => {
   useEffect(() => {
     socket.on("connection", (passcode_status) => {
       console.log("connected!");
-      setConnection(!passcode_status);
+      setConnecting(passcode_status);
     });
     socket.on("command", (data) => {
       console.log(data);
     });
   }, []);
 
-  const [showConnect, setShowConnect] = useState(false);
-
   const handleButtonClick = () => {
     setShowConnect(true);
+    console.log("button Clicked!");
   };
 
   const handleEmotionData = () => {
@@ -255,13 +257,18 @@ const App = () => {
               <h1>MyDetective</h1>
             </div>
             <div className="connect-button">
-              <ConnectButton onClick={handleButtonClick}>Connect</ConnectButton>
-              {showConnect && (
+              <ConnectButton
+                handleButtonClick={handleButtonClick}
+                connecting={connecting}
+              >
+                Connect
+              </ConnectButton>
+              {showConnect ? (
                 <Connect
                   handlePasscodeChange={handlePasscodeChange}
-                  open={connection}
+                  open={connecting}
                 />
-              )}
+              ) : null}
             </div>
           </div>
           <div className="graphs">
@@ -288,19 +295,6 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <Connect handlePasscodeChange={handlePasscodeChange} open={connection} /> */
-}
 {
   /* <Form updateForm={formUpdate} /> */
-}
-
-{
-  /* <div>
-  <Button onClick={handleButtonClick}>Connect</Button>
-  {showConnect && (
-    <Connect handlePasscodeChange={handlePasscodeChange} open={connection} />
-  )}
-</div>; */
 }

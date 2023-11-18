@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import "./css/connect-button.css";
 
-const ConnectButton = ({ onClick }) => {
-  const [isEnabled, setIsEnabled] = useState(true); // Initialize as true to enable the button initially
-
-  const handleButtonClick = () => {
-    setIsEnabled(false); // Optionally disable the button after click, or handle it as per your logic
-    onClick && onClick(); // Call the passed onClick handler if it exists
-  };
+const ConnectButton = ({ handleButtonClick, connecting }) => {
+  // Determine the class to apply
+  const buttonClass = connecting ? "button" : "button green";
 
   return (
     <button
-      class="button"
+      className={buttonClass} // Use className instead of class
       data-text="Connect"
-      disabled={!isEnabled} // The button is enabled initially and gets disabled based on your logic
-      onClick={handleButtonClick} // Attach the event handler
+      onClick={handleButtonClick}
     >
-      <span class="actual-text">&nbsp;Connect&nbsp;</span>
-      <span aria-hidden="true" class="hover-text">
+      <span className="actual-text">&nbsp;Connect&nbsp;</span>
+      <span aria-hidden="false" className="hover-text">
         &nbsp;Connect&nbsp;
       </span>
     </button>

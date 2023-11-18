@@ -41,3 +41,9 @@
   width: 100%;
   filter: drop-shadow(0 0 23px var(--animation-color));
 }
+
+/* Add this new class in your CSS */
+.green .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color));
+}

@@ -18,8 +18,12 @@ const Connect = ({ handlePasscodeChange, open }) => {
     setTitle(`Connecting to server...`);
   };
 
+  const handleClose = () => {
+    handlePasscodeChange("");
+  };
+
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         {connecting ? (
