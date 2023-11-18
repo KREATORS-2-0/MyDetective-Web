@@ -50,18 +50,16 @@ const relationships = [
   "Stranger",
 ];
 
-const Form = ({ updateForm }) => {
+const Form = ({ updateForm, open }) => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [dateOfBirth, setDateOfBirth] = React.useState("");
+  const [dateOfBirth, setDateOfBirth] = React.useState(null);
   const [relationship, setRelationship] = React.useState("");
   const [caseSummary, setCaseSummary] = React.useState("");
   const [caseEvidence, setCaseEvidence] = React.useState("");
   const [criminalRecords, setCriminalRecords] = React.useState([]);
-  const [open, setOpen] = React.useState(true);
   const [numRecords, setNumRecords] = React.useState([0]);
   const handleClose = () => {
-    setOpen(false);
     updateForm(firstName, "firstName");
     updateForm(lastName, "lastName");
     updateForm(dateOfBirth, "dateOfBirth");
@@ -69,6 +67,17 @@ const Form = ({ updateForm }) => {
     updateForm(caseSummary, "caseSummary");
     updateForm(caseEvidence, "caseEvidence");
     updateForm(criminalRecords, "criminalRecords");
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      dateOfBirth === null ||
+      relationship === "" ||
+      caseSummary === "" ||
+      caseEvidence === ""
+    ) {
+      updateForm("", "incomplete");
+      return;
+    }
     updateForm("", "completed");
   };
 
@@ -127,7 +136,9 @@ const Form = ({ updateForm }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date Of Birth"
+              helperText="Please select suspect's date of birth"
               sx={{ width: "100%" }}
+              defaultCalendarMonth="1999-10-13"
               value={dateOfBirth} // Use 'value' instead of 'data'
               onChange={(newValue) => {
                 if (newValue) {
@@ -176,6 +187,7 @@ const Form = ({ updateForm }) => {
           <TextField
             id="case_summary"
             label="Case Summary"
+            helperText="Please provide a brief summary of the case"
             multiline
             fullWidth
             rows={4}
@@ -193,6 +205,7 @@ const Form = ({ updateForm }) => {
           <TextField
             id="case_evidence"
             label="Case Evidence"
+            helperText="Please provide a brief summary of the case evidence"
             multiline
             fullWidth
             rows={4}

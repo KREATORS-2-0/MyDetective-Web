@@ -18,9 +18,15 @@ const App = () => {
   const [connecting, setConnecting] = React.useState(true);
   const [formData, setFormData] = React.useState({});
   const [showConnect, setShowConnect] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
+
+  const handleFormOpen = () => {
+    setFormOpen(true);
+  };
 
   const formUpdate = async (data, key) => {
     if (key === "completed") {
+      setFormOpen(false);
       try {
         let conversationHistory = [];
         // Assuming you have the necessary data in your formData
@@ -50,6 +56,8 @@ const App = () => {
       } catch (error) {
         console.error("Error in getCompletion:", error);
       }
+    } else if (key === "incomplete") {
+      return;
     } else {
       const temp = formData;
       temp[key] = data;
@@ -248,6 +256,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Form updateForm={formUpdate} open={formOpen} />
       <div className="panels-container">
         <div className="leftPanel">
           <div className="logo">
@@ -288,7 +297,7 @@ const App = () => {
         <div className="rightPanel">
           <div className="GPTChatBox">
             <div className="right-panel-header">
-              <CaseFormButton />
+              <CaseFormButton handleOpen={handleFormOpen} />
             </div>
             {/* <GPTChatBox /> */}
           </div>
@@ -299,6 +308,3 @@ const App = () => {
 };
 
 export default App;
-{
-  /* <Form updateForm={formUpdate} /> */
-}
