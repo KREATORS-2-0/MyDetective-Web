@@ -7,16 +7,35 @@ import "./css/background.css";
 import "./css/header.css";
 import Form from "./components/Form.jsx";
 import socket from "./client.js";
+import getCompletion from "./gpt.js";
 
 const App = () => {
   // set up state for the passcode
   const [connection, setConnection] = React.useState(true);
   const [formData, setFormData] = React.useState({});
 
-  const formUpdate = (data, key) => {
+  const formUpdate = async (data, key) => {
     if (key === "completed") {
-      // gpt goes here
-      console.log(formData);
+      try {
+        let conversationHistory=[]
+        // Assuming you have the necessary data in your formData
+        const { name, date, relationship, caseSummary, caseEvidence, crimeRecords } = formData;
+  
+        // Build the detective prompt
+        const detectivePrompt = `I am a detective and I am trying to interrogate a suspect. The suspect name is ${name} born at ${date}. The suspect is a ${relationship} 
+          to the victim. The cases summarize that ${caseSummary}. The evidence that supports the crime is ${caseEvidence}.
+          the suspect has criminal records of ${crimeRecords}. Provide me a three guide questions for me to ask to the suspect in order to figure out the real criminal. Simply respond with possible questions and don't say anything else.
+          The questions must be able to ba anserwed by suspect within 1 sentence`;
+  
+        // Call getCompletion
+        const response = await getCompletion(detectivePrompt, conversationHistory);
+  
+        // Handle the response as needed
+        console.log(response);
+      } catch (error) {
+        console.error("Error in getCompletion:", error);
+      }
+
     } else {
       const temp = formData;
       temp[key] = data;
