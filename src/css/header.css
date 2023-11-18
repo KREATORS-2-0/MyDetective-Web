@@ -1,7 +1,7 @@
 
 .my-detective-heading {
     display:flex;
-    font-family: 'Roboto', sans-serif; /* Replace with the actual font you want to use */
+    font-family: 'Times New Roman', Times, serif;
     color: #002e63/* Set the text color to contrast with the background */
     /* Add any other styles as needed */
   }
