@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./css/case-list.css";
 
 const CaseList = () => {
