@@ -1,19 +1,120 @@
-/* app.css */
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif; /* Specify your preferred font family */
-
+  box-sizing: border-box;
 }
 
-.app-container {
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* This makes the container take up the full height of the viewport */
+}
+
+.panels-container {
+  display: flex;
+  height: 100vh; /* This makes the container take up the full height of the viewport */
+  background-color: #16161d;
+}
+
+.leftPanel,
+.rightPanel {
+  flex: 1; /* This makes each panel take up equal space */
+  overflow: auto; /* This makes the panels scrollable */
+  /* Additional styling */
+}
+
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 7;
+  height: 100vh;
+}
+
+.rightPanel {
+  flex: 10;
+  background-color: whitesmoke;
+  border-radius: 2%;
+  /* border-top-left-radius: 2%;
+  border-bottom-left-radius: 2%; */
+
+  margin-block: 1%;
+  margin-right: 1%;
+}
+
+.graphs {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.eeg-graph,
+.emotion-graph {
+  flex: 1;
+  /* Optional: add a minimum height if needed */
+  min-height: 50px;
+}
+.eeg-graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 2%;
+  background-color: whitesmoke;
+  margin: 3%;
+}
+
+.emotion-graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 2%;
+  background-color: whitesmoke;
+  margin: 3%;
+}
+
+.logo {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo-image {
+  flex: 1;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10vh;
-  background-color:#BFC9CA; /* Optional: Add a background color for better visibility */
 }
 
-h1 {
-  font-size: 2em; /* Optional: Adjust the font size */
+.logo-name {
+  flex: 5;
+  color: #b2beb5;
+  height: auto;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5vh;
+  display: flex;
+}
+
+.connect-button {
+  flex: 3.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 1%;
+}
+
+.GPTChatBox {
+  padding: 1%;
 }
