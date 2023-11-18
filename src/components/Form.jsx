@@ -50,11 +50,25 @@ const relationships = [
   "Stranger",
 ];
 
-const Form = () => {
+const Form = ({ updateForm }) => {
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [dateOfBirth, setDateOfBirth] = React.useState("");
+  const [relationship, setRelationship] = React.useState("");
+  const [caseSummary, setCaseSummary] = React.useState("");
+  const [caseEvidence, setCaseEvidence] = React.useState("");
+  const [criminalRecords, setCriminalRecords] = React.useState([]);
   const [open, setOpen] = React.useState(true);
   const [numRecords, setNumRecords] = React.useState([0]);
   const handleClose = () => {
     setOpen(false);
+    updateForm(firstName, "firstName");
+    updateForm(lastName, "lastName");
+    updateForm(dateOfBirth, "dateOfBirth");
+    updateForm(relationship, "relationship");
+    updateForm(caseSummary, "caseSummary");
+    updateForm(caseEvidence, "caseEvidence");
+    updateForm(criminalRecords, "criminalRecords");
   };
 
   const handleAdd = () => {
@@ -84,18 +98,22 @@ const Form = () => {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="firstName"
             label="First Name"
             type="email"
             fullWidth
+            data={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="lastName"
             label="Last Name"
             type="email"
             fullWidth
+            data={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
         <div
@@ -106,7 +124,18 @@ const Form = () => {
           }}
         >
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Date Of Birth" sx={{ width: "100%" }} />
+            <DatePicker
+              label="Date Of Birth"
+              sx={{ width: "100%" }}
+              value={dateOfBirth} // Use 'value' instead of 'data'
+              onChange={(newValue) => {
+                if (newValue) {
+                  setDateOfBirth(newValue.format("YYYY-MM-DD")); // Format the date
+                } else {
+                  setDateOfBirth(null); // Handle null case (e.g., if the date is cleared)
+                }
+              }}
+            />
           </LocalizationProvider>
         </div>
         <div
@@ -122,6 +151,8 @@ const Form = () => {
             label="Relationships"
             helperText="Please select suspect's relationship to the victim"
             fullWidth
+            value={relationship}
+            onChange={(e) => setRelationship(e.target.value)}
           >
             {relationships.map((option) => (
               <MenuItem key={option} value={option}>
@@ -142,11 +173,13 @@ const Form = () => {
           }}
         >
           <TextField
-            id="outlined-multiline-static"
+            id="case_summary"
             label="Case Summary"
             multiline
             fullWidth
             rows={4}
+            data={caseSummary}
+            onChange={(e) => setCaseSummary(e.target.value)}
           />
         </div>
         <div
@@ -157,11 +190,13 @@ const Form = () => {
           }}
         >
           <TextField
-            id="outlined-multiline-static"
+            id="case_evidence"
             label="Case Evidence"
             multiline
             fullWidth
             rows={4}
+            data={caseEvidence}
+            onChange={(e) => setCaseEvidence(e.target.value)}
           />
         </div>
         <Divider style={{ marginTop: "20px" }}>
@@ -180,10 +215,16 @@ const Form = () => {
         >
           {numRecords.map((num) => (
             <TextField
-              id="outlined-multiline-static"
+              id={num.toString()}
               label="Criminal Records"
               multiline
               fullWidth
+              data={criminalRecords[num]}
+              onChange={(e) => {
+                let temp = criminalRecords;
+                temp[num] = e.target.value;
+                setCriminalRecords(temp);
+              }}
             />
           ))}
 
