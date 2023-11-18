@@ -58,7 +58,7 @@ const App = () => {
         console.error("Error in getCompletion:", error);
       }
     } else if (key === "incomplete") {
-      return;
+      setFormOpen(false);
     } else {
       const temp = formData;
       temp[key] = data;
