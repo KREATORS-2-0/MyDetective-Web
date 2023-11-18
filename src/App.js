@@ -6,6 +6,7 @@ import "./css/app.css";
 import "./css/background.css";
 import "./css/header.css";
 import Connect from "./components/Connect";
+import Form from "./components/Form.jsx";
 import socket from "./client.js";
 
 const App = () => {
@@ -32,7 +33,8 @@ const App = () => {
 
   return (
     <>
-      <Connect handlePasscodeChange={handlePasscodeChange} open={connection} />
+      {/* <Connect handlePasscodeChange={handlePasscodeChange} open={connection} /> */}
+      <Form handlePasscodeChange={handlePasscodeChange} open={connection} />
       <div className="app-container">
         <h1 className="my-detective-heading">MyDetective</h1>
       </div>
