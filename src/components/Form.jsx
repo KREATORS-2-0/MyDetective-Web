@@ -69,6 +69,7 @@ const Form = ({ updateForm }) => {
     updateForm(caseSummary, "caseSummary");
     updateForm(caseEvidence, "caseEvidence");
     updateForm(criminalRecords, "criminalRecords");
+    updateForm("", "completed");
   };
 
   const handleAdd = () => {

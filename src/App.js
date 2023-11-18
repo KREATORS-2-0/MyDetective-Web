@@ -14,10 +14,14 @@ const App = () => {
   const [formData, setFormData] = React.useState({});
 
   const formUpdate = (data, key) => {
-    const temp = formData;
-    temp[key] = data;
-    setFormData(temp);
-    console.log(temp);
+    if (key === "completed") {
+      // gpt goes here
+      console.log(formData);
+    } else {
+      const temp = formData;
+      temp[key] = data;
+      setFormData(temp);
+    }
   };
 
   const handlePasscodeChange = (newPasscode) => {
