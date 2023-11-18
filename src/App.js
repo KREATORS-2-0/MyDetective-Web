@@ -33,8 +33,8 @@ const App = () => {
 
   return (
     <>
-      {/* <Connect handlePasscodeChange={handlePasscodeChange} open={connection} /> */}
-      <Form handlePasscodeChange={handlePasscodeChange} open={connection} />
+      <Connect handlePasscodeChange={handlePasscodeChange} open={connection} />
+      {/* <Form handlePasscodeChange={handlePasscodeChange} open={connection} /> */}
       <div className="app-container">
         <h1 className="my-detective-heading">MyDetective</h1>
       </div>
