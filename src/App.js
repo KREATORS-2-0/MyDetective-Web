@@ -10,6 +10,7 @@ import EEGChart from "./components/EEGGraph.jsx";
 import GPTChatBox from "./components/GPTChatBox.jsx";
 import ConnectButton from "./components/ConnectButton.jsx";
 import CaseFormButton from "./components/CaseFormButton.jsx";
+import CaseList from "./components/CaseList.jsx";
 
 const App = () => {
   // set up state for the passcode
@@ -288,7 +289,12 @@ const App = () => {
         <div className="rightPanel">
           <div className="GPTChatBox">
             <div className="right-panel-header">
-              <CaseFormButton />
+              <div className="case-form-button-box">
+                <CaseFormButton />
+              </div>
+              <div className="case-list-box">
+                <CaseList />
+              </div>
             </div>
             {/* <GPTChatBox /> */}
           </div>
