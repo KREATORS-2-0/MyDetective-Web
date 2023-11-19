@@ -1,4 +1,18 @@
-/* Assuming your canvas has a class 'chart-canvas' */
+.chart-container {
+  display: flex; /* Changed to flex for alignment */
+  justify-content: center;
+  align-items: center;
+  /* Set specific width and height smaller than emotion-graph */
+  width: 450px;
+  height: 600px;
+  /* Add some padding or margin if needed */
+}
+
 .chart-canvas {
-  border: 2px solid white; /* Adjust the size as needed */
+  border: 2px solid white; /* Adds a white border */
+  /* Set width and height to be slightly less than chart-container */
+  width: 95%; /* Adjust percentage as needed */
+  height: 95%; /* Adjust percentage as needed */
+  /* Ensure the canvas is centered in chart-container */
+  margin: auto;
 }

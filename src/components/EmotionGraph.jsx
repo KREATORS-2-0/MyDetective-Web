@@ -64,6 +64,7 @@ const MyChart = ({ data }) => {
   };
 
   const options = {
+    responsive: true,
     scales: {
       y: {
         type: "category",

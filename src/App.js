@@ -13,6 +13,7 @@ import StatusButton from "./components/StatusButton.jsx";
 import EEGData from "./components/EegData.jsx";
 import TranscriptedData from "./components/TranscriptedData.jsx";
 import Suggestions from "./components/Suggestions.jsx";
+import Button from "./components/Button.jsx";
 
 const handleEmotionData = () => {
   const data = {
@@ -302,6 +303,7 @@ const App = () => {
             ) : (
               <Suggestions />
             )}
+            <Button handleButton={handleCommand} />
           </div>
         </div>
       </div>
