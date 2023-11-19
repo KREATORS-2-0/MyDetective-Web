@@ -1,6 +1,7 @@
 import React from "react";
 import "./css/transcripted-data.css";
 import Typed from "react-typed";
+import { Typography } from "@mui/material";
 
 const TranscriptedData = ({ data }) => {
   return (
@@ -22,6 +23,11 @@ const TranscriptedData = ({ data }) => {
               />
             )}
           </p>
+        </div>
+        <div class="socialbar2">
+          <Typography fontSize={20} color={"#1eff8e"}>
+            {data["emotion"]}
+          </Typography>
         </div>
       </center>
     </div>

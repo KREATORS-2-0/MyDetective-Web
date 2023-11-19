@@ -64,6 +64,7 @@ const MyChart = ({ data }) => {
   };
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     scales: {
       y: {
@@ -85,7 +86,17 @@ const MyChart = ({ data }) => {
         },
       },
     },
+
     plugins: {
+      title: {
+        display: true,
+        text: "Emotion Graph", // Add your desired title here
+        color: "#1eff8e", // Customize the title color if needed
+        font: {
+          size: 18, // Adjust the font size as needed
+          weight: "bold", // Add font weight if desired
+        },
+      },
       legend: {
         label: {
           color: "#1eff8e",

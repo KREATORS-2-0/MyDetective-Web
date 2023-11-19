@@ -1,6 +1,6 @@
-// Load API key from environment variable
+// // Load API key from environment variable
 
-// GPT INITIALIZATION
+// // GPT INITIALIZATION
 
 async function initializeGPT(
   name,
@@ -57,7 +57,7 @@ async function initializeGPT(
   }
 }
 
-// Subsequent GPT interaction
+// // Subsequent GPT interaction
 
 async function getCompletion(
   question,
