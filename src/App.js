@@ -255,6 +255,43 @@ const App = () => {
 
   const eegData = handleEEGData();
 
+  const gptData = [
+    `After making these changes, test your emotion graph to ensure that
+  the emojis are displayed correctly. Also, verify that the EEG graph
+  remains unaffected and works as intended. By following these steps,
+  you will successfully add the emoji plugin to your emotion graph
+  without impacting other charts in your React application. To maintain
+  the overall styling and behavior, you will need to adjust the CSS properties
+  related to the title's height and padding.After making these changes, test your emotion graph to ensure that
+  the emojis are displayed correctly. Also, verify that the EEG graph
+  remains unaffected and works as intended. By following these steps,
+  you will successfully add the emoji plugin to your emotion graph
+  without impacting other charts in your React application. To maintain
+  the overall styling and behavior, you will need to adjust the CSS properties
+  related to the title's height and padding.`,
+    `After making these changes, test your emotion graph to ensure that
+  the emojis are displayed correctly. Also, verify that the EEG graph works as intended. By following these steps,
+  you will successfully add the emoji plugin to your emotion graph
+  without impacting other charts in your React application. To maintain
+  the overall styling and behavior, you will need to adjust the CSS properties
+  related to the title's height and padding.`,
+    `After making these changes, test your emotion graph to ensure that`,
+    `After making these changes, test your emotion graph to ensure that
+  the emojis are displayed correctly. Also, verify that the EEG graph
+  remains unaffected and works as intended. By following these steps,
+  you will successfully add the emoji plugin to your emotion graph
+  without impacting other charts in your React application. To maintain
+  the overall styling and behavior, you will need to adjust the CSS properties
+  related to the title's height and padding.`,
+    `After making these changes, test your emotion graph to ensure that
+  the emojis are displayed correctly. Also, verify that the EEG graph works as intended. By following these steps,
+  you will successfully add the emoji plugin to your emotion graph
+  without impacting other charts in your React application. To maintain
+  the overall styling and behavior, you will need to adjust the CSS properties
+  related to the title's height and padding.`,
+    `After making these changes, test your emotion graph to ensure that`,
+  ];
+
   return (
     <div className="App">
       <Form updateForm={formUpdate} open={formOpen} />
@@ -296,16 +333,18 @@ const App = () => {
           </div>
         </div>
         <div className="rightPanel">
-          <div className="GPTChatBox">
-            <div className="right-panel-header">
-              <div className="case-form-button-box">
-                <CaseFormButton handleOpen={handleFormOpen} />
-              </div>
-              <div className="case-list-box">
-                <CaseList />
-              </div>
+          <div className="right-panel-header">
+            <div className="case-form-button-box">
+              <CaseFormButton handleOpen={handleFormOpen} />
             </div>
-            {/* <GPTChatBox /> */}
+            <div className="case-list-box">
+              <CaseList />
+            </div>
+          </div>
+          <div className="GPTChatBox">
+            {gptData.map((data) => (
+              <GPTChatBox gptText={data} />
+            ))}
           </div>
         </div>
       </div>

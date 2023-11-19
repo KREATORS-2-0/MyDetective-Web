@@ -1,4 +1,5 @@
 .card {
+  margin-top: 2%;
   width: 100vh;
   height: 120px;
   transition: all 0.5s;
@@ -6,21 +7,24 @@
     -15px -15px 30px rgba(60, 60, 60, 0.082);
   text-align: center;
   overflow: hidden;
+  border-radius: 15px;
 }
 
 .card:hover {
-  height: 260px;
-  background: linear-gradient(360deg, #edededc5 60%, hsla(0, 0%, 13%, 1) 70%);
+  height: 200px;
+  background: linear-gradient(360deg, whitesmoke 60%, hsla(0, 0%, 13%, 1) 70%);
 }
 
 .card .header {
+  height: 120px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #212121;
+  background: whitesmoke;
   margin-bottom: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .card .header .img-box {
@@ -29,12 +33,19 @@
 
 .card .header .title {
   font-size: 1em;
-  letter-spacing: 0.1em;
   font-weight: 900;
-  text-transform: uppercase;
-  padding: 4px 0 14px 0;
+  padding: 1px 0;
   transition: all 0.5s;
-  color: #edededc5;
+  color: black;
+  white-space: normal; /* Allows text wrapping */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 60px; /* Set a fixed maximum height */
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #888 #f0f0f0; /* Optional: Style the scrollbar (Firefox) */
+}
+
+.card:hover .header .title {
+  padding: 1px 0; /* Keep consistent padding */
 }
 
 .card:hover .header {
@@ -69,4 +80,16 @@
 
 .card .content .btn-link:hover {
   border-bottom: 1px solid #1d8122;
+}
+
+.chat-box-buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 2%;
+  gap: 10px; /* Add space between buttons */
 }
