@@ -122,28 +122,8 @@ const App = () => {
       faceData: null,
       EEGData: "",
       speechData: {
-        transcriptedData: "",
+        transcript: "",
         emotion: "",
-      },
-    },
-    {
-      title: "Title!",
-      summary: "summary",
-      faceData: handleEmotionData(),
-      EEGData: "true",
-      speechData: {
-        transcriptedData: "hi how are you I am good thanks!",
-        emotion: "happy",
-      },
-    },
-    {
-      title: "Title!",
-      summary: "summary",
-      faceData: handleEmotionData1(),
-      EEGData: "false",
-      speechData: {
-        transcriptedData: "I am not happy at all dammit!",
-        emotion: "neutral",
       },
     },
   ]);
@@ -223,6 +203,9 @@ const App = () => {
   };
 
   const handleCommand = (command) => {
+    if (command === "Stop") {
+      setLoading(true);
+    }
     socket.emit("command", command);
   };
 
@@ -233,6 +216,17 @@ const App = () => {
     });
     socket.on("command", (data) => {
       console.log(data);
+      setLoading(false);
+      let temp = formData;
+      temp["emtpy"] = false;
+      setFormData(temp);
+
+      // update the question history with the new data
+      let History = questionHistory;
+      data["EEGData"] = "true";
+      History.push(data);
+      setQuestionHistory(History);
+      setCurrentHistory(History.length - 1);
     });
   }, []);
 
@@ -308,7 +302,7 @@ const App = () => {
             ) : (
               <>
                 {loading && (
-                  <div class="🤚" style={{ marginTop: "20px" }}>
+                  <div class="🤚" style={{ marginTop: "30px" }}>
                     <div class="👉"></div>
                     <div class="👉"></div>
                     <div class="👉"></div>

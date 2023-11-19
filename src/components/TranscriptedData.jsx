@@ -16,8 +16,8 @@ const TranscriptedData = ({ data }) => {
           <p class="terminal_text">
             {data === "" ? null : (
               <Typed
-                key={data["transcriptedData"]}
-                strings={[data["transcriptedData"]]}
+                key={data["transcript"]}
+                strings={[data["transcript"]]}
                 typeSpeed={50}
               />
             )}

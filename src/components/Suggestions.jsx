@@ -6,17 +6,22 @@ import Typed from "react-typed";
 
 export default function Suggestions({ data, handleClick, buttonClick }) {
   const [index, setIndex] = React.useState(-1);
+  const [stopped, setStopped] = React.useState(false);
 
   const handleClickIndex = (i) => {
     console.log(i);
     setIndex(i);
   };
 
+  const handleStop = () => {
+    setStopped(true);
+  };
+
   return (
     <>
       {data[0] == "" ? null : (
         <div class="cards">
-          {index == -1 || index == 0 ? (
+          {!stopped && (index == -1 || index == 0) ? (
             <div
               className="card white"
               onClick={() => {
@@ -32,7 +37,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
               </p>
             </div>
           ) : null}
-          {index == -1 || index == 1 ? (
+          {!stopped && (index == -1 || index == 1) ? (
             <div
               className="card white"
               onClick={() => {
@@ -48,7 +53,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
               </p>
             </div>
           ) : null}
-          {index == -1 || index == 2 ? (
+          {!stopped && (index == -1 || index == 2) ? (
             <div
               className="card white"
               onClick={() => {
@@ -76,15 +81,29 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
             display: "flex",
           }}
         >
-          <button className="start-pause" onClick={() => buttonClick("Start")}>
-            START
-          </button>
-          <button className="start-pause" onClick={() => buttonClick("Stop")}>
-            STOP
-          </button>
+          {stopped ? (
+            <></>
+          ) : (
+            <>
+              <button
+                className="start-pause"
+                onClick={() => buttonClick("Start")}
+              >
+                START
+              </button>
+              <button
+                className="start-pause"
+                onClick={() => {
+                  buttonClick("Stop");
+                  handleStop();
+                }}
+              >
+                STOP
+              </button>
+            </>
+          )}
         </div>
       )}
-
       <div class="warning" style={{ marginTop: "80px" }}>
         <p class="warning-title">
           Disclaimer for Use of Generated Interrogation Questions
