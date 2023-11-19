@@ -1,6 +1,7 @@
 .container {
   width: 330px;
   height: 100%;
+  display: flex;
 }
 
 .terminal_toolbar {
@@ -117,15 +118,21 @@
 .terminal_text {
   word-wrap: break-word; /* Breaks long words and wraps onto the next line */
   white-space: pre-wrap; /* Maintains whitespace formatting and wraps text */
+  max-height: 100%;
 }
 
-/* .terminal_cursor {
-  display: block;
-  height: 14px;
-  width: 5px;
-  margin-left: 10px;
-  animation: curbl 1200ms linear infinite;
-} */
+.socialbar2 {
+  flex: 1;
+  margin-top: 10%;
+  display: fixed;
+  background-color: #191919;
+  border-radius: 3em;
+  width: 90%;
+  height: 60px;
+  padding: 14px;
+  color: white;
+  box-shadow: 3px 3px 15px rgb(0, 0, 0), -3px -3px 15px rgb(58, 58, 58);
+}
 
 @keyframes curbl {
   0% {
