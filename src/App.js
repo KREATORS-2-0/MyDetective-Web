@@ -16,6 +16,7 @@ import Suggestions from "./components/Suggestions.jsx";
 import { CircularProgress } from "@mui/material";
 import Button from "./components/Button.jsx";
 import "./components/css/loader.css";
+import "./components/css/case-form-button.css";
 
 const openaiAPIKey = "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";
 
@@ -110,6 +111,8 @@ const App = () => {
   const [status, setStatus] = useState(true);
   const [loading, setLoading] = useState(false);
   const [currentSuggestion, setCurrentSuggestion] = useState(-1);
+  const [title, setTitle] = useState("");
+  const [nextQuestionButton, setNextQuestionButton] = useState(false);
 
   // for gpt
   const [conversationHistory, setConversationHistory] = useState([]);
@@ -132,6 +135,11 @@ const App = () => {
   // states for current suggestions from gpt
   const [suggestions, setSuggestions] = useState(["", "", ""]);
 
+  const fetchQuestions = async () => {
+    setNextQuestionButton(false);
+    //  get the response from gpt
+  };
+
   const onSelectHistory = (index) => {
     setCurrentHistory(index);
     console.log(index);
@@ -142,9 +150,10 @@ const App = () => {
     setCurrentHistory(0);
   };
 
-  const selectSuggestion = (index) => {
+  const selectSuggestion = (index, tt) => {
     setCurrentSuggestion(index);
-    console.log(index);
+    console.log(tt);
+    setTitle(tt);
   };
 
   const handleFormOpen = () => {
@@ -170,6 +179,7 @@ const App = () => {
         openaiAPIKey,
         tempHistory
       );
+      setConversationHistory(tempHistory);
       setLoading(false);
       // // // update the question history
       // let History = questionHistory;
@@ -180,6 +190,7 @@ const App = () => {
       // setCurrentHistory(History.length - 1);
 
       // // update the suggestions
+
       setSuggestions(JSON.parse(response));
     } else if (key === "incomplete") {
       setFormOpen(false);
@@ -209,24 +220,33 @@ const App = () => {
     socket.emit("command", command);
   };
 
+  const handleResponse = (response) => {
+    // update the question history with the new data
+    let temp = formData;
+    temp["emtpy"] = false;
+    setFormData(temp);
+
+    let History = questionHistory;
+
+    response["EEGData"] = "true";
+    response["title"] = suggestions[currentSuggestion];
+    console.log(response);
+    History.push(response);
+    setQuestionHistory(History);
+    setCurrentHistory(History.length - 1);
+    setSuggestions(["", "", ""]);
+    setNextQuestionButton(true);
+  };
+
   useEffect(() => {
     socket.on("connection", (passcode_status) => {
       console.log("connected!");
       setConnecting(passcode_status);
     });
     socket.on("command", (data) => {
-      console.log(data);
       setLoading(false);
-      let temp = formData;
-      temp["emtpy"] = false;
-      setFormData(temp);
-
+      handleResponse(data);
       // update the question history with the new data
-      let History = questionHistory;
-      data["EEGData"] = "true";
-      History.push(data);
-      setQuestionHistory(History);
-      setCurrentHistory(History.length - 1);
     });
   }, []);
 
@@ -315,6 +335,11 @@ const App = () => {
                 {formData["emtpy"] && (
                   <CaseFormButton handleOpen={handleFormOpen} />
                 )}
+                {nextQuestionButton ? (
+                  <button onClick={fetchQuestions} className="form-button">
+                    Generate Next Questions
+                  </button>
+                ) : null}
                 <Suggestions
                   data={suggestions}
                   handleClick={selectSuggestion}

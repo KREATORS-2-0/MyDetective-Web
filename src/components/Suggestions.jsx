@@ -9,7 +9,6 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
   const [stopped, setStopped] = React.useState(false);
 
   const handleClickIndex = (i) => {
-    console.log(i);
     setIndex(i);
   };
 
@@ -25,7 +24,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
             <div
               className="card white"
               onClick={() => {
-                handleClick(0);
+                handleClick(0, data[0]);
                 handleClickIndex(0);
               }}
               style={{
@@ -41,8 +40,8 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
             <div
               className="card white"
               onClick={() => {
+                handleClick(1, data[1]);
                 handleClickIndex(1);
-                handleClick(1);
               }}
               style={{
                 border: index == 0 ? "2px solid black" : null,
@@ -57,8 +56,8 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
             <div
               className="card white"
               onClick={() => {
+                handleClick(2, data[2]);
                 handleClickIndex(2);
-                handleClick(2);
               }}
               style={{
                 border: index == 0 ? "2px solid black" : null,
