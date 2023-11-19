@@ -18,9 +18,9 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
 
   return (
     <>
-      {data[0] == "" ? null : (
+      {data[0] === "" ? null : (
         <div class="cards">
-          {!stopped && (index == -1 || index == 0) ? (
+          {!stopped && (index === -1 || index === 0) ? (
             <div
               className="card white"
               onClick={() => {
@@ -28,7 +28,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
                 handleClickIndex(0);
               }}
               style={{
-                border: index == 0 ? "2px solid black" : null,
+                border: index === 0 ? "2px solid black" : null,
               }}
             >
               <p className="tip">
@@ -36,7 +36,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
               </p>
             </div>
           ) : null}
-          {!stopped && (index == -1 || index == 1) ? (
+          {!stopped && (index === -1 || index === 1) ? (
             <div
               className="card white"
               onClick={() => {
@@ -44,7 +44,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
                 handleClickIndex(1);
               }}
               style={{
-                border: index == 0 ? "2px solid black" : null,
+                border: index === 0 ? "2px solid black" : null,
               }}
             >
               <p className="tip">
@@ -52,7 +52,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
               </p>
             </div>
           ) : null}
-          {!stopped && (index == -1 || index == 2) ? (
+          {!stopped && (index === -1 || index === 2) ? (
             <div
               className="card white"
               onClick={() => {
@@ -60,7 +60,7 @@ export default function Suggestions({ data, handleClick, buttonClick }) {
                 handleClickIndex(2);
               }}
               style={{
-                border: index == 0 ? "2px solid black" : null,
+                border: index === 0 ? "2px solid black" : null,
               }}
             >
               <p className="tip">

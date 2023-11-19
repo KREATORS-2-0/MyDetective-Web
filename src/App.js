@@ -111,7 +111,7 @@ const App = () => {
   const [status, setStatus] = useState(true);
   const [loading, setLoading] = useState(false);
   const [currentSuggestion, setCurrentSuggestion] = useState(-1);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState([""]);
   const [nextQuestionButton, setNextQuestionButton] = useState(false);
 
   // for gpt
@@ -120,7 +120,7 @@ const App = () => {
   // History of the conversation
   const [questionHistory, setQuestionHistory] = useState([
     {
-      title: "",
+      title: title[0],
       summary: "",
       faceData: null,
       EEGData: "",
@@ -153,7 +153,9 @@ const App = () => {
   const selectSuggestion = (index, tt) => {
     setCurrentSuggestion(index);
     console.log(tt);
-    setTitle(tt);
+    let temp = title;
+    temp.push(tt);
+    setTitle(temp);
   };
 
   const handleFormOpen = () => {
@@ -228,8 +230,6 @@ const App = () => {
 
     let History = questionHistory;
 
-    response["EEGData"] = "true";
-    response["title"] = suggestions[currentSuggestion];
     console.log(response);
     History.push(response);
     setQuestionHistory(History);
@@ -316,6 +316,7 @@ const App = () => {
                     data={data}
                     handleClick={onSelectHistory}
                     index={index + 1}
+                    title={title[index + 1]}
                   />
                 ))}
               </>

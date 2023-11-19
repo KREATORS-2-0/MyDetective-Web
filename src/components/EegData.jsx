@@ -10,9 +10,9 @@ const EEGData = ({ eegData }) => {
           <img
             src={require("../images/NatHackLogo.png")}
             className={`logo-image ${
-              eegData
+              eegData["EEG"] === "true"
                 ? "logo-image-green"
-                : eegData === false
+                : eegData["EEG"] === "false"
                 ? "logo-image-red"
                 : ""
             }`}
@@ -22,7 +22,7 @@ const EEGData = ({ eegData }) => {
         <div className="Name"></div>
         <div className="socialbar">
           <Typography fontSize={20} color={"#1eff8e"}>
-            {eegData}
+            {eegData["EEG"]}
           </Typography>
         </div>
       </center>
