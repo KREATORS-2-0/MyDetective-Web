@@ -106,8 +106,10 @@
 }
 
 .terminal_text {
+  margin-left: 4%;
   margin-right: 5%;
   color: #ffffff;
+  text-align: left;
 }
 
 .terminal_content {
