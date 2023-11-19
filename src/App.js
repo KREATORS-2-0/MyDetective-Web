@@ -14,9 +14,9 @@ import EEGData from "./components/EegData.jsx";
 import TranscriptedData from "./components/TranscriptedData.jsx";
 import Suggestions from "./components/Suggestions.jsx";
 import { CircularProgress } from "@mui/material";
+import Button from "./components/Button.jsx";
 
 const openaiAPIKey = "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";
-import Button from "./components/Button.jsx";
 
 const handleEmotionData = () => {
   const data = {
@@ -202,6 +202,9 @@ const App = () => {
     } else if (key === "incomplete") {
       setFormOpen(false);
       setLoading(false);
+      let temp = formData;
+      temp["emtpy"] = true;
+      setFormData(temp);
     } else {
       const temp = formData;
       temp[key] = data;
