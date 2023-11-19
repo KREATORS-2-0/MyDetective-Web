@@ -165,15 +165,21 @@ const App = () => {
           to the victim. The cases summarize that ${caseSummary}. The evidence that supports the crime is ${caseEvidence}.
           the suspect has criminal records of ${crimeRecords}. Provide me a three guide questions for me to ask to the suspect in order to figure out the real criminal. Simply respond with possible questions and don't say anything else.
           The questions must be able to ba anserwed by suspect within 1 sentence`;
-
+        /////////////////////////////////////////////////
         // Call getCompletion
         // const response = await getCompletion(
         //   detectivePrompt,
         //   conversationHistory
         // );
-
+        //
         // Handle the response as needed
         // console.log(response);
+
+        
+
+
+
+        /////////////////////////////////////////////////
       } catch (error) {
         console.error("Error in getCompletion:", error);
       }
