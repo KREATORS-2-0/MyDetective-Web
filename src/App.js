@@ -6,11 +6,12 @@ import socket from "./client.js";
 import getCompletion from "./gpt.js";
 import Form from "./components/Form.jsx";
 import EmotionChart from "./components/EmotionGraph.jsx";
-import EEGChart from "./components/EEGGraph.jsx";
 import GPTChatBox from "./components/GPTChatBox.jsx";
 import ConnectButton from "./components/ConnectButton.jsx";
 import CaseFormButton from "./components/CaseFormButton.jsx";
 import CaseList from "./components/CaseList.jsx";
+import TranscriptedData from "./components/TranscriptedData.jsx";
+import EEGData from "./components/EegData.jsx";
 
 const App = () => {
   // set up state for the passcode
@@ -135,126 +136,6 @@ const App = () => {
 
   const emotionData = handleEmotionData();
 
-  const handleEEGData = () => {
-    const data = [
-      {
-        "EXG Channel 1": -144.917383383,
-        "EXG Channel 2": -384.8132660408,
-        "EXG Channel 3": -328.6885874057,
-        "EXG Channel 4": -149.2444476318,
-        Timestamp: 1700261346.6810429096,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 72.1239706455,
-        "EXG Channel 2": -871.1479863287,
-        "EXG Channel 3": 114.8298882395,
-        "EXG Channel 4": 63.974728642,
-        Timestamp: 1700261346.6810429096,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -125.3876258144,
-        "EXG Channel 2": -1285.7420757166,
-        "EXG Channel 3": -284.4044320304,
-        "EXG Channel 4": -141.8544053193,
-        Timestamp: 1700261346.6956601143,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -12.7754982486,
-        "EXG Channel 2": -1147.8893633499,
-        "EXG Channel 3": -76.1780221974,
-        "EXG Channel 4": -16.2760446072,
-        Timestamp: 1700261346.6956601143,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 88.8936820468,
-        "EXG Channel 2": -837.5487251268,
-        "EXG Channel 3": 174.9188608276,
-        "EXG Channel 4": 92.1473950082,
-        Timestamp: 1700261346.6958003044,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -78.747333467,
-        "EXG Channel 2": -1144.3626376917,
-        "EXG Channel 3": -160.3295111004,
-        "EXG Channel 4": -82.3862561239,
-        Timestamp: 1700261346.6958003044,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -89.1816543434,
-        "EXG Channel 2": -1302.33975172,
-        "EXG Channel 3": -249.5635240432,
-        "EXG Channel 4": -92.1174758086,
-        Timestamp: 1700261346.7092843056,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 68.4401691891,
-        "EXG Channel 2": -880.9427843126,
-        "EXG Channel 3": 163.3962290641,
-        "EXG Channel 4": 80.942654741,
-        Timestamp: 1700261346.7092843056,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 12.7081800494,
-        "EXG Channel 2": -973.8082401124,
-        "EXG Channel 3": -1.3575836839,
-        "EXG Channel 4": -1.2977452846,
-        Timestamp: 1700261346.7249467373,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -140.9119505305,
-        "EXG Channel 2": -1360.4353576316,
-        "EXG Channel 3": -331.2990375748,
-        "EXG Channel 4": -148.6236242391,
-        Timestamp: 1700261346.7249467373,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 45.237829864,
-        "EXG Channel 2": -980.1511104372,
-        "EXG Channel 3": 86.1972141787,
-        "EXG Channel 4": 54.0452942597,
-        Timestamp: 1700261346.7257108688,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": 66.8918506075,
-        "EXG Channel 2": -869.6744657462,
-        "EXG Channel 3": 120.7127508698,
-        "EXG Channel 4": 66.1775297159,
-        Timestamp: 1700261346.7257108688,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -132.4971756302,
-        "EXG Channel 2": -1284.8706790269,
-        "EXG Channel 3": -279.4490645891,
-        "EXG Channel 4": -137.2618081737,
-        Timestamp: 1700261346.7392427921,
-        Response: null,
-      },
-      {
-        "EXG Channel 1": -18.9313735757,
-        "EXG Channel 2": -1149.145969735,
-        "EXG Channel 3": -79.8393842541,
-        "EXG Channel 4": -14.604309327,
-        Timestamp: 1700261346.7392427921,
-        Response: null,
-      },
-    ];
-    return data;
-  };
-
-  const eegData = handleEEGData();
-
   const gptData = [
     `After making these changes, test your emotion graph to ensure that
   the emojis are displayed correctly. Also, verify that the EEG graph
@@ -320,16 +201,19 @@ const App = () => {
             </div>
           </div>
           <div className="graphs">
-            { <div className="emotion-graph">
-              <EmotionChart data={emotionData} />
-            </div> }
-            { <div className="eeg-graph">
-              {eegData ? (
-                <EEGChart data={eegData} />
-              ) : (
-                <div>Loading EEG Data...</div>
-              )}
-            </div> }
+            {
+              <div className="emotion-graph">
+                <EmotionChart data={emotionData} />
+              </div>
+            }
+            <div className="eeg-graph">
+              <div className="eeg-data">
+                <EEGData />
+              </div>
+              <div className="transcripted-data">
+                <TranscriptedData />
+              </div>
+            </div>
           </div>
         </div>
         <div className="rightPanel">

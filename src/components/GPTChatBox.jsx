@@ -8,7 +8,7 @@ export default function GPTChatBox({ gptText }) {
       <div class="header">
         {gptText && <Typed strings={[gptText]} typeSpeed={50} />}
       </div>
-      <div class="chat-box-buttons">
+      {/* <div class="chat-box-buttons">
         <button class="form-button">
           <span class="circle1"></span>
           <span class="circle2"></span>
@@ -33,7 +33,7 @@ export default function GPTChatBox({ gptText }) {
           <span class="circle5"></span>
           <span class="text">Graph</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
