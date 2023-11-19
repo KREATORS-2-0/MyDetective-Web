@@ -66,10 +66,19 @@ async function getCompletion(
   eegData,
   facialExpressionPrediction,
   transcriptionPrediction,
+  openaiAPIKey,
   model = "gpt-4",
   temperature = 0
 ) {
-  const prompt = `The question chosen was this: ${question}. The answer was this: ${answer}. The EEG data is as follows: ${eegData}. The facial expression emotional classification is as follows: ${facialExpressionPrediction}. The transcription emotional classification is as follows: ${transcriptionPrediction}. Just like what you did before, do not return anything else other than the next three questions I should ask the suspect based on the suspect's answer in the same array format.`;
+  // Formatting facialExpressionPrediction for the prompt
+  let facialExpressionStr = "Facial expressions over time: ";
+  facialExpressionPrediction.TimeStamp.forEach((time, index) => {
+    facialExpressionStr += `${time} - ${facialExpressionPrediction.Emotion[index]}, `;
+  });
+
+  // Trimming the last comma and space
+  facialExpressionStr = facialExpressionStr.slice(0, -2);
+  const prompt = `The question chosen was this: ${question}. The answer was this: ${answer}. The EEG data is as follows: ${eegData}. The facial expression emotional classification is as follows: ${facialExpressionStr}. The transcription emotional classification is as follows: ${transcriptionPrediction}. Just like what you did before, do not return anything else other than the next three questions I should ask the suspect based on the suspect's answer in the same array format.`;
 
   conversationHistory.push({ role: "user", content: prompt });
 

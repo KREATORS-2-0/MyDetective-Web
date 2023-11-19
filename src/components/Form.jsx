@@ -138,7 +138,6 @@ const Form = ({ updateForm, open }) => {
               label="Date Of Birth"
               helperText="Please select suspect's date of birth"
               sx={{ width: "100%" }}
-              defaultCalendarMonth="1999-10-13"
               value={dateOfBirth} // Use 'value' instead of 'data'
               onChange={(newValue) => {
                 if (newValue) {

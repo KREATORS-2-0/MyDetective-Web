@@ -3,7 +3,7 @@ import Image from "./components/ImageComponent";
 import "./css/app.css";
 import Connect from "./components/Connect";
 import socket from "./client.js";
-import getCompletion from "./gpt.js";
+import { getCompletion, initializeGPT } from "./gpt.js";
 import Form from "./components/Form.jsx";
 import EmotionChart from "./components/EmotionGraph.jsx";
 import QuestionCard from "./components/QuestionCard.jsx";
@@ -13,6 +13,9 @@ import StatusButton from "./components/StatusButton.jsx";
 import EEGData from "./components/EegData.jsx";
 import TranscriptedData from "./components/TranscriptedData.jsx";
 import Suggestions from "./components/Suggestions.jsx";
+import { CircularProgress } from "@mui/material";
+
+const openaiAPIKey = "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";
 
 const handleEmotionData = () => {
   const data = {
@@ -99,10 +102,15 @@ const App = () => {
 
   // todo for yongbin if connnecting is false, then set the connect button to Green
   const [connecting, setConnecting] = React.useState(true);
-  const [formData, setFormData] = React.useState({});
+  const [formData, setFormData] = React.useState({ emtpy: true });
   const [showConnect, setShowConnect] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [status, setStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [currentSuggestion, setCurrentSuggestion] = useState(-1);
+
+  // for gpt
+  const [conversationHistory, setConversationHistory] = useState([]);
 
   // History of the conversation
   const [questionHistory, setQuestionHistory] = useState([
@@ -140,7 +148,7 @@ const App = () => {
   const [currentHistory, setCurrentHistory] = useState(0);
 
   // states for current suggestions from gpt
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState(["", "", ""]);
 
   const onSelectHistory = (index) => {
     setCurrentHistory(index);
@@ -152,51 +160,47 @@ const App = () => {
     setCurrentHistory(0);
   };
 
+  const selectSuggestion = async (index) => {
+    setCurrentSuggestion(index);
+  };
+
   const handleFormOpen = () => {
+    let temp = formData;
+    temp["emtpy"] = false;
+    setFormData(temp);
     setFormOpen(true);
+    setLoading(true);
   };
 
   const formUpdate = async (data, key) => {
     if (key === "completed") {
       setFormOpen(false);
-
-<<<<<<< HEAD
+      let tempHistory = [];
       // call gpt here and get the response
-      const response = "";
+      const response = await initializeGPT(
+        formData["name"],
+        formData["date"],
+        formData["relationship"],
+        formData["caseSummary"],
+        formData["caseEvidence"],
+        formData["crimeRecords"],
+        openaiAPIKey,
+        tempHistory
+      );
+      setLoading(false);
+      // // // update the question history
+      // let History = questionHistory;
+      // History.push(response);
+      // setQuestionHistory(History);
 
-      // update the question history
-      let History = questionHistory;
-      History.push(response);
+      // // // update the current history to display the latest
+      // setCurrentHistory(History.length - 1);
 
-      setQuestionHistory(History);
-      setCurrentHistory(History.length - 1);
-=======
-        // Build the detective prompt
-        const detectivePrompt = `I am a detective and I am trying to interrogate a suspect. The suspect name is ${name} born at ${date}. The suspect is a ${relationship} 
-          to the victim. The cases summarize that ${caseSummary}. The evidence that supports the crime is ${caseEvidence}.
-          the suspect has criminal records of ${crimeRecords}. Provide me a three guide questions for me to ask to the suspect in order to figure out the real criminal. Simply respond with possible questions and don't say anything else.
-          The questions must be able to ba anserwed by suspect within 1 sentence`;
-        /////////////////////////////////////////////////
-        // Call getCompletion
-        // const response = await getCompletion(
-        //   detectivePrompt,
-        //   conversationHistory
-        // );
-        //
-        // Handle the response as needed
-        // console.log(response);
-
-        
-
-
-
-        /////////////////////////////////////////////////
-      } catch (error) {
-        console.error("Error in getCompletion:", error);
-      }
->>>>>>> origin
+      // // update the suggestions
+      setSuggestions(JSON.parse(response));
     } else if (key === "incomplete") {
       setFormOpen(false);
+      setLoading(false);
     } else {
       const temp = formData;
       temp[key] = data;
@@ -231,7 +235,6 @@ const App = () => {
     console.log("button Clicked!");
   };
 
-  const emotionData = handleEmotionData();
   return (
     <div className="App">
       <Form updateForm={formUpdate} open={formOpen} />
@@ -281,9 +284,6 @@ const App = () => {
         </div>
         <div className="rightPanel">
           <div className="right-panel-header">
-            <div className="case-form-button-box">
-              <CaseFormButton handleOpen={handleFormOpen} />
-            </div>
             <div className="case-list-box">
               <StatusButton handleClick={handleStatusChange} />
             </div>
@@ -300,7 +300,21 @@ const App = () => {
                 ))}
               </>
             ) : (
-              <Suggestions />
+              <>
+                {loading && (
+                  <div>
+                    <CircularProgress />
+                  </div>
+                )}
+                <div style={{ marginTop: "30px" }}></div>
+                {formData["emtpy"] && (
+                  <CaseFormButton handleOpen={handleFormOpen} />
+                )}
+                <Suggestions
+                  data={suggestions}
+                  handleClick={selectSuggestion}
+                />
+              </>
             )}
           </div>
         </div>
