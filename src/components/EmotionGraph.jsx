@@ -42,8 +42,12 @@ const MyChart = ({ data }) => {
   }, []);
 
   // Add null values to the beginning and end of your data arrays
-  const paddedEmotions = [null, ...data.Emotion, null];
-  const paddedTimeStamps = ["", ...data.TimeStamp.map(formatTime), ""];
+  let paddedEmotions = [];
+  let paddedTimeStamps = [];
+  if (data !== null) {
+    paddedEmotions = [null, ...data.Emotion, null];
+    paddedTimeStamps = ["", ...data.TimeStamp.map(formatTime), ""];
+  }
 
   const chartData = {
     labels: paddedTimeStamps,

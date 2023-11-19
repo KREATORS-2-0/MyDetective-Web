@@ -12,6 +12,7 @@ import CaseFormButton from "./components/CaseFormButton.jsx";
 import StatusButton from "./components/StatusButton.jsx";
 import EEGData from "./components/EegData.jsx";
 import TranscriptedData from "./components/TranscriptedData.jsx";
+import Suggestions from "./components/Suggestions.jsx";
 
 const handleEmotionData = () => {
   const data = {
@@ -105,6 +106,16 @@ const App = () => {
 
   // History of the conversation
   const [questionHistory, setQuestionHistory] = useState([
+    {
+      title: "",
+      summary: "",
+      faceData: null,
+      EEGData: "",
+      speechData: {
+        transcriptedData: "",
+        emotion: "",
+      },
+    },
     {
       title: "Title!",
       summary: "summary",
@@ -279,15 +290,17 @@ const App = () => {
           <div className="GPTChatBox">
             {status ? (
               <>
-                {questionHistory.map((data, index) => (
+                {questionHistory.slice(1).map((data, index) => (
                   <QuestionCard
                     data={data}
                     handleClick={onSelectHistory}
-                    index={index}
+                    index={index + 1}
                   />
                 ))}
               </>
-            ) : null}
+            ) : (
+              <Suggestions />
+            )}
           </div>
         </div>
       </div>
