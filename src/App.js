@@ -137,7 +137,18 @@ const App = () => {
 
   const fetchQuestions = async () => {
     setNextQuestionButton(false);
-    //  get the response from gpt
+    getCompletion(
+      questionHistory[currentHistory]["speechData"].transcript,
+      questionHistory[currentHistory]["summary"],
+      conversationHistory,
+      questionHistory[currentHistory]["EEGData"],
+      handleEmotionData1(),
+      questionHistory[currentHistory]["speechData"].emotion,
+      openaiAPIKey
+    );
+    // setStatus(true);
+    console.log("fetching questions");
+    console.log(conversationHistory);
   };
 
   const onSelectHistory = (index) => {
