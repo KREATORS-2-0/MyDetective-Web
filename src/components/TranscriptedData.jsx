@@ -14,7 +14,7 @@ const TranscriptedData = ({ data }) => {
         </div>
         <div class="terminal_content">
           <p class="terminal_text">
-            {data && (
+            {data === "" ? null : (
               <Typed
                 key={data["transcriptedData"]}
                 strings={[data["transcriptedData"]]}
