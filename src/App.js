@@ -208,10 +208,10 @@ const App = () => {
             }
             <div className="eeg-graph">
               <div className="eeg-data">
-                <EEGData />
+                <EEGData eegData={true} />
               </div>
               <div className="transcripted-data">
-                <TranscriptedData />
+                <TranscriptedData transcriptedData={true} />
               </div>
             </div>
           </div>

@@ -2,8 +2,7 @@ import React from "react";
 import "./css/eeg-data.css";
 import { Typography } from "@mui/material";
 
-const EEGData = () => {
-  const eegData = "Lie";
+const EEGData = ({ eegData }) => {
   return (
     <div class="eeg-card">
       <center>
@@ -30,7 +29,7 @@ const EEGData = () => {
         <div class="Name"></div>
         <div class="socialbar">
           <Typography fontSize={20} color={"#1eff8e"}>
-            Lie
+            {eegData}
           </Typography>
         </div>
       </center>

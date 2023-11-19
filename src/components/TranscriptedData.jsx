@@ -2,9 +2,7 @@ import React from "react";
 import "./css/transcripted-data.css";
 import Typed from "react-typed";
 
-const TranscriptedData = () => {
-  const transcriptedData =
-    "This is the transcr ipted data from the EEG headset.";
+const TranscriptedData = ({ transcriptedData }) => {
   return (
     <div class="eeg-card">
       <center>
