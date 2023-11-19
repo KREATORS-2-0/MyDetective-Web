@@ -324,6 +324,7 @@ const App = () => {
                 <Suggestions
                   data={suggestions}
                   handleClick={selectSuggestion}
+                  buttonClick={handleCommand}
                 />
               </>
             )}

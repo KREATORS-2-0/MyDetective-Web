@@ -4,7 +4,7 @@ import "./css/warning.css";
 import "./css/start_pause.css";
 import Typed from "react-typed";
 
-export default function Suggestions({ data, handleClick }) {
+export default function Suggestions({ data, handleClick, buttonClick }) {
   const [index, setIndex] = React.useState(-1);
 
   const handleClickIndex = (i) => {
@@ -76,8 +76,12 @@ export default function Suggestions({ data, handleClick }) {
             display: "flex",
           }}
         >
-          <button className="start-pause">START</button>
-          <button className="start-pause">STOP</button>
+          <button className="start-pause" onClick={() => buttonClick("Start")}>
+            START
+          </button>
+          <button className="start-pause" onClick={() => buttonClick("Stop")}>
+            STOP
+          </button>
         </div>
       )}
 
