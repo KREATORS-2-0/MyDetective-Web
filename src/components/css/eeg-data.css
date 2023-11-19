@@ -27,6 +27,12 @@
   height: auto; /* maintain the aspect ratio */
 }
 
+.logo-image-red {
+  box-shadow: 0px 0px 10px 5px #ff0000; /* blue shadow */
+  width: 100%; /* or any other percentage */
+  height: auto; /* maintain the aspect ratio */
+}
+
 .pfp {
   border-radius: 35em;
   fill: white;
