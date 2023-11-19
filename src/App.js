@@ -53,6 +53,46 @@ const handleEmotionData = () => {
   return data;
 };
 
+const handleEmotionData1 = () => {
+  const data = {
+    TimeStamp: [
+      "2023-11-17 17:51:25",
+      "2023-11-17 17:51:27",
+      "2023-11-17 17:51:28",
+      "2023-11-17 17:51:29",
+      "2023-11-17 17:51:30",
+      "2023-11-17 17:51:31",
+      "2023-11-17 17:51:33",
+      "2023-11-17 17:51:34",
+      "2023-11-17 17:51:35",
+      "2023-11-17 17:51:36",
+      "2023-11-17 17:51:37",
+      "2023-11-17 17:51:38",
+      "2023-11-17 17:51:39",
+      "2023-11-17 17:51:41",
+      "2023-11-17 17:51:42",
+    ],
+    Emotion: [
+      "sad",
+      "happy",
+      "sad",
+      "neutral",
+      "happy",
+      "sad",
+      "sad",
+      "sad",
+      "neutral",
+      "sad",
+      "neutral",
+      "neutral",
+      "happy",
+      "neutral",
+      "surprise",
+    ],
+  };
+  return data;
+};
+
 const App = () => {
   // set up state for the passcode
 
@@ -78,7 +118,7 @@ const App = () => {
     {
       title: "Title!",
       summary: "summary",
-      faceData: handleEmotionData(),
+      faceData: handleEmotionData1(),
       EEGData: "false",
       speechData: {
         transcriptedData: "I am not happy at all dammit!",
@@ -87,6 +127,9 @@ const App = () => {
     },
   ]);
   const [currentHistory, setCurrentHistory] = useState(0);
+
+  // states for current suggestions from gpt
+  const [suggestions, setSuggestions] = useState([]);
 
   const onSelectHistory = (index) => {
     setCurrentHistory(index);

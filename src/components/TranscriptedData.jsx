@@ -14,9 +14,12 @@ const TranscriptedData = ({ data }) => {
         </div>
         <div class="terminal_content">
           <p class="terminal_text">
-            <>{data["transcriptedData"]}</>
             {data && (
-              <Typed strings={[data["transcriptedData"]]} typeSpeed={50} />
+              <Typed
+                key={data["transcriptedData"]}
+                strings={[data["transcriptedData"]]}
+                typeSpeed={50}
+              />
             )}
           </p>
         </div>
