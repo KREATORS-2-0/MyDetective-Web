@@ -136,19 +136,23 @@ const App = () => {
   const [suggestions, setSuggestions] = useState(["", "", ""]);
 
   const fetchQuestions = async () => {
+    let temp = conversationHistory;
     setNextQuestionButton(false);
-    getCompletion(
-      questionHistory[currentHistory]["speechData"].transcript,
-      questionHistory[currentHistory]["summary"],
-      conversationHistory,
-      questionHistory[currentHistory]["EEGData"],
-      handleEmotionData1(),
-      questionHistory[currentHistory]["speechData"].emotion,
+    setLoading(true);
+    const response = await getCompletion(
+      title[title.length - 1],
+      questionHistory[questionHistory.length - 1]["speechData"]["transcript"],
+      temp,
+      questionHistory[questionHistory.length - 1]["EEGData"]["EEG"],
+      questionHistory[questionHistory.length - 1]["faceData"],
+      questionHistory[questionHistory.length - 1]["speechData"]["emotion"],
       openaiAPIKey
     );
-    // setStatus(true);
-    console.log("fetching questions");
-    console.log(conversationHistory);
+    setConversationHistory(temp);
+    console.log(response);
+    setLoading(false);
+    setSuggestions(JSON.parse(response));
+    handleStatusChange();
   };
 
   const onSelectHistory = (index) => {
