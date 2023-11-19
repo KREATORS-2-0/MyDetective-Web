@@ -1,28 +1,83 @@
 import React from "react";
 import "./css/suggestion-cards.css";
 import "./css/warning.css";
+import "./css/start_pause.css";
 import Typed from "react-typed";
 
 export default function Suggestions({ data, handleClick }) {
+  const [index, setIndex] = React.useState(-1);
+
+  const handleClickIndex = (i) => {
+    console.log(i);
+    setIndex(i);
+  };
+
   return (
     <>
       {data[0] == "" ? null : (
         <div class="cards">
-          <div className="card white" onClick={() => handleClick(0)}>
-            <p className="tip">
-              <Typed key={data[0]} strings={[data[0]]} typeSpeed={50} />
-            </p>
-          </div>
-          <div className="card white" onClick={() => handleClick(1)}>
-            <p className="tip">
-              <Typed key={data[1]} strings={[data[1]]} typeSpeed={50} />
-            </p>
-          </div>
-          <div className="card white" onClick={() => handleClick(2)}>
-            <p className="tip">
-              <Typed key={data[2]} strings={[data[2]]} typeSpeed={50} />
-            </p>
-          </div>
+          {index == -1 || index == 0 ? (
+            <div
+              className="card white"
+              onClick={() => {
+                handleClick(0);
+                handleClickIndex(0);
+              }}
+              style={{
+                border: index == 0 ? "2px solid black" : null,
+              }}
+            >
+              <p className="tip">
+                <Typed key={data[0]} strings={[data[0]]} typeSpeed={50} />
+              </p>
+            </div>
+          ) : null}
+          {index == -1 || index == 1 ? (
+            <div
+              className="card white"
+              onClick={() => {
+                handleClickIndex(1);
+                handleClick(1);
+              }}
+              style={{
+                border: index == 0 ? "2px solid black" : null,
+              }}
+            >
+              <p className="tip">
+                <Typed key={data[1]} strings={[data[1]]} typeSpeed={50} />
+              </p>
+            </div>
+          ) : null}
+          {index == -1 || index == 2 ? (
+            <div
+              className="card white"
+              onClick={() => {
+                handleClickIndex(2);
+                handleClick(2);
+              }}
+              style={{
+                border: index == 0 ? "2px solid black" : null,
+              }}
+            >
+              <p className="tip">
+                <Typed key={data[2]} strings={[data[2]]} typeSpeed={50} />
+              </p>
+            </div>
+          ) : null}
+        </div>
+      )}
+      {index !== -1 && (
+        <div
+          style={{
+            marginTop: "5%",
+            alignContent: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <button className="start-pause">START</button>
+          <button className="start-pause">STOP</button>
         </div>
       )}
 

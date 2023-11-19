@@ -15,6 +15,7 @@ import TranscriptedData from "./components/TranscriptedData.jsx";
 import Suggestions from "./components/Suggestions.jsx";
 import { CircularProgress } from "@mui/material";
 import Button from "./components/Button.jsx";
+import "./components/css/loader.css";
 
 const openaiAPIKey = "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";
 
@@ -161,8 +162,9 @@ const App = () => {
     setCurrentHistory(0);
   };
 
-  const selectSuggestion = async (index) => {
+  const selectSuggestion = (index) => {
     setCurrentSuggestion(index);
+    console.log(index);
   };
 
   const handleFormOpen = () => {
@@ -306,8 +308,13 @@ const App = () => {
             ) : (
               <>
                 {loading && (
-                  <div>
-                    <CircularProgress />
+                  <div class="🤚" style={{ marginTop: "20px" }}>
+                    <div class="👉"></div>
+                    <div class="👉"></div>
+                    <div class="👉"></div>
+                    <div class="👉"></div>
+                    <div class="🌴"></div>
+                    <div class="👍"></div>
                   </div>
                 )}
                 <div style={{ marginTop: "30px" }}></div>
@@ -320,7 +327,6 @@ const App = () => {
                 />
               </>
             )}
-            <Button handleButton={handleCommand} />
           </div>
         </div>
       </div>
