@@ -64,9 +64,28 @@ const MyChart = ({ data }) => {
       y: {
         type: "category",
         labels: Object.keys(emotions),
+        grid: {
+          color: "#1eff8e",
+        },
+        ticks: {
+          color: "#1eff8e",
+        },
+      },
+      x: {
+        grid: {
+          color: "#1eff8e",
+        },
+        ticks: {
+          color: "#1eff8e",
+        },
       },
     },
     plugins: {
+      legend: {
+        label: {
+          color: "#1eff8e",
+        },
+      },
       tooltip: {
         callbacks: {
           label: function (context) {
@@ -77,7 +96,7 @@ const MyChart = ({ data }) => {
     },
   };
 
-  return <Line data={chartData} options={options} />;
+  return <Line data={chartData} options={options} className="chart-canvas" />;
 };
 
 export default MyChart;

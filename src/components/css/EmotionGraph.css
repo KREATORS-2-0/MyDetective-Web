@@ -1,0 +1,4 @@
+/* Assuming your canvas has a class 'chart-canvas' */
+.chart-canvas {
+  border: 2px solid white; /* Adjust the size as needed */
+}

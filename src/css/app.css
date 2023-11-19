@@ -63,15 +63,34 @@ body {
   /* Optional: add a minimum height if needed */
   min-height: 50px;
 }
+
 .eeg-graph {
   display: flex;
+  flex-direction: row;
+}
+
+.eeg-data {
+  display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   padding-left: 2%;
   padding-right: 2%;
   border-radius: 2%;
-  background-color: whitesmoke;
-  margin: 3%;
+  margin: 2%;
+  border-radius: 2%;
+}
+
+.transcripted-data {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 2%;
+  margin: 2%;
+  border-radius: 2%;
 }
 
 .emotion-graph {
@@ -81,8 +100,8 @@ body {
   padding-left: 2%;
   padding-right: 2%;
   border-radius: 2%;
-  background-color: whitesmoke;
-  margin: 3%;
+  margin: 2%;
+  border-color: #1eff8e;
 }
 
 .logo {
@@ -109,6 +128,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.5vh;
   display: flex;
+}
+
+.logo-name:hover {
+  color: #1eff8e;
 }
 
 .connect-button {
