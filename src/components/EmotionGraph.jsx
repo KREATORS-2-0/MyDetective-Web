@@ -8,6 +8,7 @@ const emotions = {
   neutral: "😐",
   fear: "😨",
   sad: "😢",
+  angry: "😠",
 };
 
 const formatTime = (timestamp) => timestamp.split(" ")[1];

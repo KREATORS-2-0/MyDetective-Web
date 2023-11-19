@@ -152,7 +152,6 @@ const App = () => {
     console.log(response);
     setLoading(false);
     setSuggestions(JSON.parse(response));
-    handleStatusChange();
   };
 
   const onSelectHistory = (index) => {
