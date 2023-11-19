@@ -159,35 +159,16 @@ const App = () => {
   const formUpdate = async (data, key) => {
     if (key === "completed") {
       setFormOpen(false);
-      try {
-        let conversationHistory = [];
-        // Assuming you have the necessary data in your formData
-        const {
-          name,
-          date,
-          relationship,
-          caseSummary,
-          caseEvidence,
-          crimeRecords,
-        } = formData;
 
-        // Build the detective prompt
-        const detectivePrompt = `I am a detective and I am trying to interrogate a suspect. The suspect name is ${name} born at ${date}. The suspect is a ${relationship} 
-          to the victim. The cases summarize that ${caseSummary}. The evidence that supports the crime is ${caseEvidence}.
-          the suspect has criminal records of ${crimeRecords}. Provide me a three guide questions for me to ask to the suspect in order to figure out the real criminal. Simply respond with possible questions and don't say anything else.
-          The questions must be able to ba anserwed by suspect within 1 sentence`;
+      // call gpt here and get the response
+      const response = "";
 
-        // Call getCompletion
-        // const response = await getCompletion(
-        //   detectivePrompt,
-        //   conversationHistory
-        // );
+      // update the question history
+      let History = questionHistory;
+      History.push(response);
 
-        // Handle the response as needed
-        // console.log(response);
-      } catch (error) {
-        console.error("Error in getCompletion:", error);
-      }
+      setQuestionHistory(History);
+      setCurrentHistory(History.length - 1);
     } else if (key === "incomplete") {
       setFormOpen(false);
     } else {

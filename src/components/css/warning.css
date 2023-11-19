@@ -41,7 +41,7 @@
 .warning {
   display: block;
   position: relative;
-  max-width: 300px;
+  max-width: 600px;
   max-height: 320px;
   background-color: #f2f8f9;
   border-radius: 10px;
@@ -70,7 +70,7 @@
 }
 
 .warning:hover:before {
-  transform: scale(28);
+  transform: scale(45);
 }
 
 .warning:hover .small-desc {

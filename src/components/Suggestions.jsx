@@ -36,12 +36,15 @@ export default function Suggestions() {
         </div>
       </div>
       <div class="warning" style={{ marginTop: "80px" }}>
-        <p class="warning-title">Product Name</p>
+        <p class="warning-title">
+          Disclaimer for Use of Generated Interrogation Questions
+        </p>
         <p class="small-desc">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat
-          veritatis nobis saepe itaque rerum nostrum aliquid obcaecati odio
-          officia deleniti. Expedita iste et illum, quaerat pariatur consequatur
-          eum nihil itaque!
+          Please be advised that the interrogation questions provided have been
+          generated using an advanced artificial intelligence language model.
+          While these questions can serve as a useful guide or starting point,
+          they are not tailored to specific individuals or circumstances and may
+          not cover all relevant aspects of your particular situation.
         </p>
         <div class="go-corner">
           <div class="go-arrow">→</div>
