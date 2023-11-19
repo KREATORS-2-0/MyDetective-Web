@@ -16,6 +16,7 @@ import Suggestions from "./components/Suggestions.jsx";
 import { CircularProgress } from "@mui/material";
 
 const openaiAPIKey = "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";
+import Button from "./components/Button.jsx";
 
 const handleEmotionData = () => {
   const data = {
@@ -316,6 +317,7 @@ const App = () => {
                 />
               </>
             )}
+            <Button handleButton={handleCommand} />
           </div>
         </div>
       </div>
