@@ -7,10 +7,10 @@ import getCompletion from "./gpt.js";
 import Form from "./components/Form.jsx";
 import EmotionChart from "./components/EmotionGraph.jsx";
 import EEGChart from "./components/EEGGraph.jsx";
-import GPTChatBox from "./components/GPTChatBox.jsx";
+import QuestionCard from "./components/QuestionCard.jsx";
 import ConnectButton from "./components/ConnectButton.jsx";
 import CaseFormButton from "./components/CaseFormButton.jsx";
-import CaseList from "./components/CaseList.jsx";
+import StatusButton from "./components/StatusButton.jsx";
 
 const App = () => {
   // set up state for the passcode
@@ -20,6 +20,24 @@ const App = () => {
   const [formData, setFormData] = React.useState({});
   const [showConnect, setShowConnect] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [status, setStatus] = useState(true);
+
+  // History of the conversation
+  const [conversationHistory, setConversationHistory] = useState([
+    { title: "Title!", summary: "summary" },
+    { title: "Title1", summary: "Summary1" },
+  ]);
+  const [currentHistory, setCurrentHistory] = useState(-1);
+
+  const onSelectHistory = (index) => {
+    setCurrentHistory(index);
+    console.log(index);
+  };
+
+  const handleStatusChange = () => {
+    setStatus(!status);
+    setCurrentHistory(-1);
+  };
 
   const handleFormOpen = () => {
     setFormOpen(true);
@@ -255,43 +273,6 @@ const App = () => {
 
   const eegData = handleEEGData();
 
-  const gptData = [
-    `After making these changes, test your emotion graph to ensure that
-  the emojis are displayed correctly. Also, verify that the EEG graph
-  remains unaffected and works as intended. By following these steps,
-  you will successfully add the emoji plugin to your emotion graph
-  without impacting other charts in your React application. To maintain
-  the overall styling and behavior, you will need to adjust the CSS properties
-  related to the title's height and padding.After making these changes, test your emotion graph to ensure that
-  the emojis are displayed correctly. Also, verify that the EEG graph
-  remains unaffected and works as intended. By following these steps,
-  you will successfully add the emoji plugin to your emotion graph
-  without impacting other charts in your React application. To maintain
-  the overall styling and behavior, you will need to adjust the CSS properties
-  related to the title's height and padding.`,
-    `After making these changes, test your emotion graph to ensure that
-  the emojis are displayed correctly. Also, verify that the EEG graph works as intended. By following these steps,
-  you will successfully add the emoji plugin to your emotion graph
-  without impacting other charts in your React application. To maintain
-  the overall styling and behavior, you will need to adjust the CSS properties
-  related to the title's height and padding.`,
-    `After making these changes, test your emotion graph to ensure that`,
-    `After making these changes, test your emotion graph to ensure that
-  the emojis are displayed correctly. Also, verify that the EEG graph
-  remains unaffected and works as intended. By following these steps,
-  you will successfully add the emoji plugin to your emotion graph
-  without impacting other charts in your React application. To maintain
-  the overall styling and behavior, you will need to adjust the CSS properties
-  related to the title's height and padding.`,
-    `After making these changes, test your emotion graph to ensure that
-  the emojis are displayed correctly. Also, verify that the EEG graph works as intended. By following these steps,
-  you will successfully add the emoji plugin to your emotion graph
-  without impacting other charts in your React application. To maintain
-  the overall styling and behavior, you will need to adjust the CSS properties
-  related to the title's height and padding.`,
-    `After making these changes, test your emotion graph to ensure that`,
-  ];
-
   return (
     <div className="App">
       <Form updateForm={formUpdate} open={formOpen} />
@@ -320,16 +301,20 @@ const App = () => {
             </div>
           </div>
           <div className="graphs">
-            { <div className="emotion-graph">
-              <EmotionChart data={emotionData} />
-            </div> }
-            { <div className="eeg-graph">
-              {eegData ? (
-                <EEGChart data={eegData} />
-              ) : (
-                <div>Loading EEG Data...</div>
-              )}
-            </div> }
+            {
+              <div className="emotion-graph">
+                <EmotionChart data={emotionData} />
+              </div>
+            }
+            {
+              <div className="eeg-graph">
+                {eegData ? (
+                  <EEGChart data={eegData} />
+                ) : (
+                  <div>Loading EEG Data...</div>
+                )}
+              </div>
+            }
           </div>
         </div>
         <div className="rightPanel">
@@ -338,13 +323,21 @@ const App = () => {
               <CaseFormButton handleOpen={handleFormOpen} />
             </div>
             <div className="case-list-box">
-              <CaseList />
+              <StatusButton handleClick={handleStatusChange} />
             </div>
           </div>
           <div className="GPTChatBox">
-            {gptData.map((data) => (
-              <GPTChatBox gptText={data} />
-            ))}
+            {status ? (
+              <>
+                {conversationHistory.map((data, index) => (
+                  <QuestionCard
+                    data={data}
+                    handleClick={onSelectHistory}
+                    index={index}
+                  />
+                ))}
+              </>
+            ) : null}
           </div>
         </div>
       </div>
