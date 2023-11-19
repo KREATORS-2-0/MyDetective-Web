@@ -6,13 +6,52 @@ import socket from "./client.js";
 import getCompletion from "./gpt.js";
 import Form from "./components/Form.jsx";
 import EmotionChart from "./components/EmotionGraph.jsx";
-import EEGChart from "./components/EEGGraph.jsx";
 import QuestionCard from "./components/QuestionCard.jsx";
 import ConnectButton from "./components/ConnectButton.jsx";
 import CaseFormButton from "./components/CaseFormButton.jsx";
 import StatusButton from "./components/StatusButton.jsx";
 import EEGData from "./components/EegData.jsx";
 import TranscriptedData from "./components/TranscriptedData.jsx";
+
+const handleEmotionData = () => {
+  const data = {
+    TimeStamp: [
+      "2023-11-17 17:51:25",
+      "2023-11-17 17:51:27",
+      "2023-11-17 17:51:28",
+      "2023-11-17 17:51:29",
+      "2023-11-17 17:51:30",
+      "2023-11-17 17:51:31",
+      "2023-11-17 17:51:33",
+      "2023-11-17 17:51:34",
+      "2023-11-17 17:51:35",
+      "2023-11-17 17:51:36",
+      "2023-11-17 17:51:37",
+      "2023-11-17 17:51:38",
+      "2023-11-17 17:51:39",
+      "2023-11-17 17:51:41",
+      "2023-11-17 17:51:42",
+    ],
+    Emotion: [
+      "sad",
+      "sad",
+      "sad",
+      "sad",
+      "happy",
+      "happy",
+      "neutral",
+      "neutral",
+      "neutral",
+      "sad",
+      "sad",
+      "surprise",
+      "neutral",
+      "neutral",
+      "sad",
+    ],
+  };
+  return data;
+};
 
 const App = () => {
   // set up state for the passcode
@@ -25,11 +64,29 @@ const App = () => {
   const [status, setStatus] = useState(true);
 
   // History of the conversation
-  const [conversationHistory, setConversationHistory] = useState([
-    { title: "Title!", summary: "summary" },
-    { title: "Title1", summary: "Summary1" },
+  const [questionHistory, setQuestionHistory] = useState([
+    {
+      title: "Title!",
+      summary: "summary",
+      faceData: handleEmotionData(),
+      EEGData: "true",
+      speechData: {
+        transcriptedData: "hi how are you I am good thanks!",
+        emotion: "happy",
+      },
+    },
+    {
+      title: "Title!",
+      summary: "summary",
+      faceData: handleEmotionData(),
+      EEGData: "false",
+      speechData: {
+        transcriptedData: "I am not happy at all dammit!",
+        emotion: "neutral",
+      },
+    },
   ]);
-  const [currentHistory, setCurrentHistory] = useState(-1);
+  const [currentHistory, setCurrentHistory] = useState(0);
 
   const onSelectHistory = (index) => {
     setCurrentHistory(index);
@@ -38,7 +95,7 @@ const App = () => {
 
   const handleStatusChange = () => {
     setStatus(!status);
-    setCurrentHistory(-1);
+    setCurrentHistory(0);
   };
 
   const handleFormOpen = () => {
@@ -113,46 +170,6 @@ const App = () => {
     console.log("button Clicked!");
   };
 
-  const handleEmotionData = () => {
-    const data = {
-      TimeStamp: [
-        "2023-11-17 17:51:25",
-        "2023-11-17 17:51:27",
-        "2023-11-17 17:51:28",
-        "2023-11-17 17:51:29",
-        "2023-11-17 17:51:30",
-        "2023-11-17 17:51:31",
-        "2023-11-17 17:51:33",
-        "2023-11-17 17:51:34",
-        "2023-11-17 17:51:35",
-        "2023-11-17 17:51:36",
-        "2023-11-17 17:51:37",
-        "2023-11-17 17:51:38",
-        "2023-11-17 17:51:39",
-        "2023-11-17 17:51:41",
-        "2023-11-17 17:51:42",
-      ],
-      Emotion: [
-        "sad",
-        "sad",
-        "sad",
-        "sad",
-        "happy",
-        "happy",
-        "neutral",
-        "neutral",
-        "neutral",
-        "sad",
-        "sad",
-        "surprise",
-        "neutral",
-        "neutral",
-        "sad",
-      ],
-    };
-    return data;
-  };
-
   const emotionData = handleEmotionData();
   return (
     <div className="App">
@@ -184,15 +201,19 @@ const App = () => {
           <div className="graphs">
             {
               <div className="emotion-graph">
-                <EmotionChart data={emotionData} />
+                <EmotionChart
+                  data={questionHistory[currentHistory]["faceData"]}
+                />
               </div>
             }
             <div className="eeg-graph">
               <div className="eeg-data">
-                <EEGData eegData={true} />
+                <EEGData eegData={questionHistory[currentHistory]["EEGData"]} />
               </div>
               <div className="transcripted-data">
-                <TranscriptedData transcriptedData={true} />
+                <TranscriptedData
+                  data={questionHistory[currentHistory]["speechData"]}
+                />
               </div>
             </div>
           </div>
@@ -209,7 +230,7 @@ const App = () => {
           <div className="GPTChatBox">
             {status ? (
               <>
-                {conversationHistory.map((data, index) => (
+                {questionHistory.map((data, index) => (
                   <QuestionCard
                     data={data}
                     handleClick={onSelectHistory}

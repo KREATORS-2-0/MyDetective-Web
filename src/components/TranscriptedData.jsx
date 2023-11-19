@@ -2,7 +2,7 @@ import React from "react";
 import "./css/transcripted-data.css";
 import Typed from "react-typed";
 
-const TranscriptedData = ({ transcriptedData }) => {
+const TranscriptedData = ({ data }) => {
   return (
     <div class="eeg-card">
       <center>
@@ -14,8 +14,9 @@ const TranscriptedData = ({ transcriptedData }) => {
         </div>
         <div class="terminal_content">
           <p class="terminal_text">
-            {transcriptedData && (
-              <Typed strings={[transcriptedData]} typeSpeed={50} />
+            <>{data["transcriptedData"]}</>
+            {data && (
+              <Typed strings={[data["transcriptedData"]]} typeSpeed={50} />
             )}
           </p>
         </div>
